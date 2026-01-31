@@ -1,6 +1,7 @@
 package willydekeyser.view;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -18,6 +19,8 @@ public class LogoutView extends VerticalLayout {
 		setDefaultHorizontalComponentAlignment(Alignment.CENTER);
 		add(new H1("Spring Boot Tutorial"));
 		add(new H2("Logout!"));
-        add(new Button("Logout", _ -> authenticationContext.logout()));
+		Button button = new Button("Logout", _ -> authenticationContext.logout());
+		button.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        add(button);
     }
 }

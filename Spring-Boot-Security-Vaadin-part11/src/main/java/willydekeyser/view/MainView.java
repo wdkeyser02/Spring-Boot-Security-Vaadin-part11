@@ -25,7 +25,7 @@ public class MainView extends VerticalLayout {
 		Boolean isAuthenticated = authenticationContext.isAuthenticated();
 		if (isAuthenticated) {
 			userName = authenticationContext.getAuthenticatedUser(CustomUser.class).get().getUsername().toUpperCase();
-		}		
+		}
 		setDefaultHorizontalComponentAlignment(Alignment.CENTER);
 		add(new H1("Spring Boot Tutorial"));
 		add(new H2("Home Page!"));
@@ -38,10 +38,10 @@ public class MainView extends VerticalLayout {
 			add(new Anchor("/login", "Login"));
 		}
 		add(new Paragraph(" "));
-		if (authenticationContext.hasRole("USER")) {
+		if (isAuthenticated && authenticationContext.hasRole("USER")) {
 			add(new Anchor("/user", "Private for User"));
 		}
-		if (authenticationContext.hasRole("ADMIN")) {
+		if (isAuthenticated && authenticationContext.hasRole("ADMIN")) {
 			add(new Anchor("/admin", "Private for Admin"));
 		} 
 		

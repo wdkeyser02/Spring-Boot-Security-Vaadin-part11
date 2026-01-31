@@ -23,6 +23,8 @@ public class SecurityConfig {
         		configurer.loginView(LoginView.class))
             .authorizeHttpRequests(authorize -> 
             	authorize.requestMatchers("/", "/public").permitAll()
+            	.requestMatchers("/user/**").hasRole("USER")
+                .requestMatchers("/admin/**").hasRole("ADMIN")
             );
         return http.build();
     }
