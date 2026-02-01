@@ -8,7 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.vaadin.flow.spring.security.VaadinSecurityConfigurer;
+import static com.vaadin.flow.spring.security.VaadinSecurityConfigurer.vaadin;
 
 import willydekeyser.view.LoginView;
 
@@ -19,10 +19,10 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-        	.with(VaadinSecurityConfigurer.vaadin(), configurer ->
-        		configurer.loginView(LoginView.class))
-            .authorizeHttpRequests(authorize -> 
-            	authorize.requestMatchers("/", "/public").permitAll()
+        	.with(vaadin(), configurer -> configurer
+        		.loginView(LoginView.class))
+            .authorizeHttpRequests(authorize -> authorize
+            	.requestMatchers("/", "/public").permitAll()
             	.requestMatchers("/user/**").hasRole("USER")
                 .requestMatchers("/admin/**").hasRole("ADMIN")
             );
